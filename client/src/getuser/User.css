@@ -1,0 +1,41 @@
+.userTable{
+    width: 80%;
+    margin: 50px auto;
+    background-color:rgb(246, 242, 242);
+    padding: 25px ;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+}
+
+.table-Bordered{
+    width: 100%;
+    
+}
+.btn-primary{
+    margin-bottom: 10px;
+}
+
+.userTable table{
+    width: 100%;
+    margin-top: 30px ;
+}
+.userTable table thead th{
+    background-color: darkgreen;
+    color: aliceblue;
+}
+.userTable table tbody td{
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+} 
+.actionButtons button{
+    margin: 0 10px;
+}
+
+.buttonDes {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
+  gap: 10px;               /* space between buttons */
+}
+
