@@ -69,7 +69,7 @@ const AddUser = () => {
                         placeholder='Enter your email' />
                 </div>
                 <div className='inputGroup'>
-                    <label htmlFor="address">Name:</label>
+                    <label htmlFor="address">Address:</label>
                     <input
                         onChange={inputhandler}
                         type="text"

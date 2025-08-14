@@ -23,7 +23,7 @@ const UpdateUser = () => {
         
     }
     
-    
+
     const { id } = useParams();
     useEffect(() => {
         const fetchUser = async () => {
@@ -46,7 +46,11 @@ const UpdateUser = () => {
             navigate("/");
 
         } catch (error) {
-            toast.error("Something went wrong");
+             if (error.response.status === 400) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error("Something went wrong");
+            }
         }
     }
 
