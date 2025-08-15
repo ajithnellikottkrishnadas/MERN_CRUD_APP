@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddUser from "./AddUser/AddUser";
-import User from "../src/getuser/User";
+import User from "./getUser/User";
 import UpdateUser from "./updateuser/UpdateUser";
 import {Toaster} from "react-hot-toast"
 
@@ -9,7 +9,7 @@ function App() {
 
   const route= createBrowserRouter([
     {
-      path:"/",
+      path:"/user",
       element:<User />
     },{
       path:"/add",
@@ -18,6 +18,10 @@ function App() {
     {
       path:"/update/:id",
       element:<UpdateUser />
+    },
+    {
+      path:"/",
+      
     }
   ]);
 
