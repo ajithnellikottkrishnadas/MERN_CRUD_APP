@@ -3,6 +3,7 @@ import AddUser from "./AddUser/AddUser";
 import User from "./getUser/User";
 import UpdateUser from "./updateuser/UpdateUser";
 import {Toaster} from "react-hot-toast"
+import Home from "./home/Home";
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
     },
     {
       path:"/",
-      
+      element:<Home />
+
     }
   ]);
 
