@@ -27,7 +27,6 @@ body{
   border-radius:10px;
   
 }
-
 .navigation ul{
   display:flex;
   width:350px;
@@ -109,31 +108,28 @@ body{
   box-shadow:0px -9px 0 0 var(--clr)
     
 }
-
-/* Indicator alignment for 3 items */
 .navigation ul li:nth-child(1).active ~ .indicator {
   transform: translateX(calc(23px));
 }
-
 .navigation ul li:nth-child(2).active ~ .indicator {
   transform: translateX(calc(140px));
 }
-
 .navigation ul li:nth-child(3).active ~ .indicator {
   transform: translateX(calc(257px));
 }
-
-/* ✅ Circle above the text */
 .navigation ul li.active .icon {
-  transform: translateY(-25px); /* adjust circle above text */
+  transform: translateY(-25px); 
 }
-
 .navigation ul li.active .text {
   opacity: 1;
-  transform: translateY(15px); /* bring text closer under circle */
+  transform: translateY(15px); 
 }
-
 ul, ol {
   padding-left: 0;
   margin: 0;
 }
+h1{
+  padding-bottom: 200px;
+  color: white;
+}
+

@@ -1,56 +1,41 @@
-import bcrypt from "bcryptjs"
-import User from "../model/userModel"
-import jwt from "jsonwebtoken"
-
-const registerUser = async (req, res) => {
-    try {
-
-        const { email, passwor } = req.body;
-
-        const userExist = await User.findOne({ email });
-        if (userExist) return res.status(400).json({ message: "user already exist" });
-
-        const hashedPassword = await bcrypt.hash(passwor, 10);
-
-        const newUser = await User.create({
-            email,
-            password: hashedPassword
-        });
-        res.status(201).json({ message: "user successfully registered" })
-
-    } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
-    }
-}
-
-const loginUser = async (req, res) => {
-
-    try {
-
-        const {email,passwor}= req.body;
-
-        const userCheck= await User.findOne({email});
-        if(!userCheck) return res.status(400).json({message:"User not exist"});
-
-        const isMatch= await bcrypt.compare(passwor, userCheck.password);
-        if(!isMatch) return res.status(400).json({message:" Wrong password "});
-
-        const token= jwt.sign(
-            {
-                id: User._id
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn:"1d"
-            }
-        )
-
-        res.json({message:"login succesfull", token})
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import Employee from "../model/employeeModel.js";
 
 
-    } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
+const registerEmployee = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const existing = await Employee.findOne({ email });
+    if (existing) return res.status(400).json({ message: "Employee already exists" });
 
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newEmployee = await Employee.create({ name, email, password: hashedPassword });
 
-}
+    //const token = jwt.sign({ id: newEmployee._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+   // console.log("JWT_SECRET:", process.env.JWT_SECRET);  => token making when registering and if i want directly get into site without login this can use. but without token registration is better.
+    
+    res.status(201).json({ message: "Employee registered"/*, token */});
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
+const loginEmployee = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const employee = await Employee.findOne({ email });
+    if (!employee) return res.status(400).json({ message: "Employee not found" });
+
+    const isMatch = await bcrypt.compare(password, employee.password);
+    if (!isMatch) return res.status(400).json({ message: "Incorrect password" });
+
+    const token = jwt.sign({ id: employee._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    res.json({ message: "Login successful", token });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export { registerEmployee, loginEmployee };
