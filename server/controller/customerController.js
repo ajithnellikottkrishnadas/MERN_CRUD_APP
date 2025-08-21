@@ -59,6 +59,11 @@ const updateCustomer = async (req, res) => {
     const { name, email, address, phone } = req.body;
     const employeeId = req.employee._id;
 
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email))
+      return res.status(400).json({ message: "Invalid email format" });
+
     const updatedCustomer = await customerModel.findOneAndUpdate(
       { _id: id, employee: employeeId },
       { name, email, address, phone },

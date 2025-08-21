@@ -1,29 +1,32 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AddUser from "./AddUser/AddUser";
-import User from "./getUser/User";
-import UpdateUser from "./updateuser/UpdateUser";
+import AddCustomer from "./AddCustomer/AddCustomer.jsx";
+import GetCustomer from "./getuser/getCustomer.jsx";
+import Login from "./home/Login.jsx"
+import Register from "./home/Register.jsx";
+import UpdateCustomer from "./updateuser/UpdateCustomer.jsx";
 import {Toaster} from "react-hot-toast"
-import Home from "./home/Home";
+
 
 
 function App() {
 
   const route= createBrowserRouter([
     {
-      path:"/user",
-      element:<User />
+      path:"/",
+      element:<Login />
     },{
-      path:"/add",
-      element: <AddUser />
+      path:"/addCustomer",
+      element: <AddCustomer />
     },
     {
       path:"/update/:id",
-      element:<UpdateUser />
-    },
-    {
-      path:"/",
-      element:<Home />
-
+      element:<UpdateCustomer />
+    },{
+      path:"/customer",
+      element:<GetCustomer />
+    },{
+      path:"/register",
+      element:<Register />
     }
   ]);
 

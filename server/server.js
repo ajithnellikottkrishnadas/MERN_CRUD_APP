@@ -11,7 +11,10 @@ const app = express();
 dotenv.config()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URL;
