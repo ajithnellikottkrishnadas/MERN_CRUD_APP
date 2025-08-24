@@ -6,6 +6,8 @@ const route= express.Router();
 route.use(authMiddleware)
 
 route.post("/customerCreate",create);
+// route.post("/customerCreate",);
+
 route.get("/customerGet",getAllCustomers);
 route.get("/customerGet/:id", getCustomerById);
 route.put("/update/:id",updateCustomer);
