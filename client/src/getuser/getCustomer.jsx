@@ -6,19 +6,19 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import toast from "react-hot-toast";
 
 
 const GetCustomers = () => {
   const [customers, setCustomers] = useState([]);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const token = localStorage.getItem("token"); // saved after login
+        const token = localStorage.getItem("token");
         if (!token) {
-          setError("No token found. Please log in again.");
+          navigate("/")
           return;
         }
 
@@ -30,30 +30,75 @@ const GetCustomers = () => {
 
         setCustomers(res.data);
       } catch (err) {
-        console.error("Error fetching customers:", err);
-        setError("Failed to fetch customers. Please try again.");
+        console.error("Failed to fetch customers. Please try again.", err);
+        toast.error(err.response?.data?.message)
       }
     };
 
     fetchCustomers();
-  }, []);
+  }, [navigate]);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
+    navigate("/");
+  }
+
+  function handleEdit(id) {
+    navigate(`/update/${id}`);
+  }
+  async function handleDelete(id) {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("No token found. Please log in again.");
+        return;
+      }
+      await axios.delete(`http://localhost:8000/api/customers/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success("Customer deleted successfully");
+      setCustomers((prev) => prev.filter((customer) => customer._id !== id));
+
+    } catch (err) {
+      console.error("Delete failed:", err);
+      toast.error(err.response?.data?.message || "Failed to delete customer");
+    }
+  }
 
   return (
     <div className="container">
 
-      <div className="buttonStyle" style={{ marginBottom: "1em", textAlign: "right" }}>
-        <h3>DASHBOARD</h3>
+      <div className="buttonStyle" >
 
-        <Button
-          variant="contained"
-          to="/addCustomer"
-          color="primary"
-          startIcon={<AddIcon />}
-          onClick={() => navigate("/addCustomer")}
-        >
-          Add Customer
-        </Button>
+        <div>        
+          <h3>DASHBOARD</h3>
+          <Button
+            className="addButton"
+            variant="contained"
+            to="/addCustomer"
+            color="success"
+            startIcon={<AddIcon />}
+            onClick={() => navigate("/addCustomer")}
+          >
+            Add Customer
+          </Button></div>
+        <div >
+          <Button
+
+            variant="contained"
+            color="error"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </div>
       </div>
+
+
       <table className="responsive-table">
 
         <thead>
@@ -83,15 +128,15 @@ const GetCustomers = () => {
                     <div>{customer.phone} </div>
                     <div>
                       <button
-                        className="boton-elegante"
-                        // onClick={() => handleEdit(customer._id)}
+                        className="boton-elegante first"
+                        to="/"
+                        onClick={() => handleEdit(customer._id)}
                       >
                         <EditIcon />
                       </button>
-
                       <button
                         className="boton-elegante second"
-                        // onClick={() => handleDelete(customer._id)}
+                        onClick={() => handleDelete(customer._id)}
                       >
                         <DeleteIcon /></button>
                     </div>
@@ -109,8 +154,11 @@ const GetCustomers = () => {
           )}
         </tbody>
       </table>
+
     </div>
+
   );
+
 };
 
 export default GetCustomers;

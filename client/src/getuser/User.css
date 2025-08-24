@@ -4,9 +4,15 @@
   margin-bottom: 1.5em;
   font-size: 1em;
 }
+.buttonStyle{ 
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
 .responsive-table thead {
-  display: table-header-group; /* default for desktop */
+  display: table-header-group;
 }
 
 .responsive-table thead th {
@@ -28,10 +34,10 @@
   text-align: center;
 }
 
-/* ---- MOBILE RESPONSIVE PART ---- */
+
 @media screen and (max-width: 768px) {
   .responsive-table thead {
-    display: none; /* hide header row */
+    display: none;
   }
 
   .responsive-table tr {
@@ -39,7 +45,7 @@
     margin-bottom: 1em;
     border: 1px solid rgba(75, 140, 237, 0.3);
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     padding: 0.5em;
   }
 
@@ -57,7 +63,7 @@
   }
 
   .responsive-table td:before {
-    content: attr(data-title); 
+    content: attr(data-title);
     font-weight: bold;
     color: rgb(25, 70, 235);
     margin-right: 1em;
@@ -68,16 +74,18 @@
 
 .iconDes {
   display: flex;
-  align-items: center; 
-  gap: 0.5rem; 
-  justify-content: space-evenly;
+  position: relative;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+  min-width: auto;
 }
 
 .iconDes .boton-elegante {
-  padding: 4px 10px; 
+  gap: 10px;
   font-size: 0.9rem;
-   border-radius: 8px; 
-   min-width: 36px;
+  border-radius: 8px;
+  min-width: 36px;
   border: 2px solid #2c2c2c;
   background-color: #1a1a1a;
   color: #ffffff;
@@ -87,25 +95,15 @@
   overflow: hidden;
   transition: all 0.4s ease;
 }
-.second{
-  padding-right: 50px;
+
+.second {
+  position: absolute;
+  padding:  0px, 0px;
+}
+.first{
+  position: absolute;
 }
 
-.iconDes .boton-elegante::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  transform: scale(0);
-  transition: transform 0.5s ease;
-}
 
 .iconDes .boton-elegante:hover::after {
   transform: scale(4);
@@ -121,6 +119,7 @@
   margin-right: 2px;
   font-size: 1rem;
 }
-.iconDes .boton-elegante + .boton-elegante {
-  margin-left: 0.5rem; 
+
+.iconDes .boton-elegante+.boton-elegante {
+  margin-left: 0.5rem;
 }

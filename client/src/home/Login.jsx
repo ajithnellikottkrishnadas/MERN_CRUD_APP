@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import "./Login.css"; // make sure you import your css
+import "./Login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -27,7 +27,7 @@ const Login = () => {
 
   return (
     <div className="addUser">
-      <h3>Login</h3>
+      <h3>Employee login</h3>
       <form onSubmit={handleSubmit}>
         <div className="inputGroup">
           <label>Email</label>

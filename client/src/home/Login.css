@@ -24,7 +24,6 @@ label{
     font-weight: bold;
     color: rgb(31, 90, 185);
     text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 .addUser button {
   margin-top: 15px;

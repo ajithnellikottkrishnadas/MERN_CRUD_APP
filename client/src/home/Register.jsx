@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import "./Login.css"; // same css file used for login
+import "./Login.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
@@ -18,7 +18,7 @@ const Register = () => {
       const res = await axios.post("http://localhost:8000/api/register", formData);
       toast.success(res.data.message);
 
-      // after successful registration, redirect to login page
+     
       navigate("/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Registration failed");
